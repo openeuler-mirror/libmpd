@@ -1,6 +1,6 @@
 Name:           libmpd
 Version:        11.8.17
-Release:        1%{?dist}
+Release:        2
 Summary:        Music Player Daemon Library
 Group:          Development/Libraries
 License:        GPLv2+
