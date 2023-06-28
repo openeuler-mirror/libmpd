@@ -1,12 +1,15 @@
 Name:           libmpd
 Version:        11.8.17
-Release:        2
+Release:        3
 Summary:        Music Player Daemon Library
 Group:          Development/Libraries
 License:        GPLv2+
 URL:            http://gmpc.wikia.com/wiki/Gnome_Music_Player_Client
 Source:         http://download.sarine.nl/Programs/gmpc/11.8/libmpd-11.8.17.tar.gz
 Patch0:         libmpd-11.8.17-strndup.patch
+%if "%toolchain"=="clang"
+Patch1:         fix-clang.patch
+%endif
 BuildRequires:  gcc
 BuildRequires:  glib2-devel >= 2.16
 %description
@@ -23,6 +26,7 @@ libmpd-devel contains libraries and header files for developing applications tha
 %prep
 %setup -q
 %patch0 -p1 -b .strndup
+%patch1 -p1
 
 %build
 %configure --disable-static
@@ -44,6 +48,9 @@ libmpd-devel contains libraries and header files for developing applications tha
 %{_includedir}/libmpd-1.0
 
 %changelog
+* Mon Jun 19 2023 zhangxiang <zhangxiang@iscas.ac.cn> - 11.8.17-2
+- Fix clang build error
+
 * Wed Jul 8 2020 Dillon Chen <dillon.chen@turbolinux.com.cn> - 11.8.17-1
 - Init Package
 - history 0.20.0, next 11.8.17
